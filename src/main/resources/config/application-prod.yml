@@ -1,0 +1,64 @@
+server:
+    port: 8080
+
+liquibase:
+    change-log: classpath:config/liquibase/master.xml
+    contexts: prod
+
+logback:
+  loglevel: INFO
+  app.loglevel: DEBUG
+  
+github.download.directory: ${OPENSHIFT_DATA_DIR}/releases
+github.users.vars.path: ${HOME}/.env/user_vars
+
+spring:
+    profiles:
+        active: prod
+    datasource:
+        driverClassName: org.postgresql.Driver        
+        url: jdbc:postgresql://${OPENSHIFT_POSTGRESQL_DB_HOST}:${OPENSHIFT_POSTGRESQL_DB_PORT}/${OPENSHIFT_APP_NAME}
+        username: ${OPENSHIFT_POSTGRESQL_DB_USERNAME}
+        password: ${OPENSHIFT_POSTGRESQL_DB_PASSWORD}
+        test-on-borrow: true
+        test-on-return: true
+        test-while-idle: true
+        validation-query: SELECT 1;
+        validation-interval: 30000
+        remove-abandoned: true
+        remove-abandoned-timeout: 60
+
+    jpa:
+        database-platform: org.hibernate.dialect.PostgreSQL82Dialect
+        database: POSTGRESQL
+        openInView: false
+        show_sql: false
+        generate-ddl: false
+        hibernate:
+            ddl-auto: none
+            naming-strategy: org.hibernate.cfg.EJB3NamingStrategy
+        properties:
+            hibernate.cache.use_second_level_cache: false
+            hibernate.cache.use_query_cache: false
+            hibernate.generate_statistics: false
+#            hibernate.cache.region.factory_class: org.hibernate.cache.ehcache.SingletonEhCacheRegionFactory
+    messages:
+        cache-seconds: 5000
+        basename: i18n/messages
+    thymeleaf:
+        mode: XHTML
+        cache: false
+
+# security configuration (this key should be unique for your application, and kept secret)
+security.rememberme.key: 7ca8472b058a18726dfg425e5f6u6k85dx6546c6b7
+
+async:
+    corePoolSize: 2
+    maxPoolSize: 50
+    queueCapacity: 10000
+            
+mail:
+    username: ${SENDGRID_USERNAME}
+    password: ${SENDGRID_PASSWORD}
+    protocol: sendgrid
+    from: no-reply@localhost.fr

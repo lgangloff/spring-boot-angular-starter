@@ -1,0 +1,69 @@
+server:
+    port: 8080
+
+liquibase:
+    change-log: classpath:config/liquibase/master.xml
+    contexts: dev
+    
+    
+logback:
+  loglevel: INFO
+  app.loglevel: DEBUG
+
+spring:
+    profiles:
+        active: local
+    datasource:
+        driverClassName: org.postgresql.Driver        
+        url: jdbc:postgresql://localhost:5432/database_name
+        username: postgres
+        password: password
+        test-on-borrow: true
+        test-on-return: true
+        test-while-idle: true
+        validation-query: SELECT 1;
+        validation-interval: 30000
+        remove-abandoned: true
+        remove-abandoned-timeout: 60
+    jpa:
+        database-platform: org.hibernate.dialect.PostgreSQL82Dialect
+        database: POSTGRESQL
+        openInView: false
+        show_sql: true
+        generate-ddl: false
+        hibernate:
+            ddl-auto: none
+            naming-strategy: org.hibernate.cfg.EJB3NamingStrategy
+        properties:
+            hibernate.cache.use_second_level_cache: false
+            hibernate.cache.use_query_cache: false
+            hibernate.generate_statistics: true
+#            hibernate.cache.region.factory_class: org.hibernate.cache.ehcache.SingletonEhCacheRegionFactory
+    messages: 
+        cache-seconds: 1
+        basename: i18n/messages
+    thymeleaf:
+        mode: XHTML
+        cache: false
+# Disable the spring security default configuration from spring-boot-actuator
+management.security.enabled: true
+security.basic.enabled: false
+
+# security configuration (this key should be unique for your application, and kept secret)
+security.rememberme.key: 7ca8472b058a2023ba576ff40139793b6546c6b7
+
+
+async:
+    corePoolSize: 2
+    maxPoolSize: 50
+    queueCapacity: 10000
+
+mail:
+    host: localhost
+    port: 25
+    username:
+    password:
+    protocol: smtp
+    tls: false
+    auth: false
+    from: no-reply@localhost.fr
