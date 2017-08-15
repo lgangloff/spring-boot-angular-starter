@@ -23,7 +23,6 @@ before_deploy:
   - export GIT_TAG=$APP_VERSION-$TRAVIS_BUILD_NUMBER
   - git tag $GIT_TAG -a -m "Generated tag from TravisCI for $GIT_TAG"
   - git push -q https://$GITHUBTOKEN@github.com/lgangloff/spring-boot-angular2-starter --tags
-  - ls -R
 
 deploy:
   provider: releases
