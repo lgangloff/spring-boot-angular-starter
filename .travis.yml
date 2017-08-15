@@ -1,0 +1,38 @@
+language: java
+jdk: oraclejdk8
+sudo: required
+dist: trusty
+cache:
+  directories:
+    - $HOME/.m2
+    - $HOME/tmp
+
+before_install:
+- export APP_VERSION=`mvn org.apache.maven.plugins:maven-help-plugin:2.1.1:evaluate
+  -Dexpression=project.version | grep -Ev '(^\[|Download\w+:)'`
+- echo $APP_VERSION
+
+install: "/bin/true"
+
+script:
+- mvn clean package
+
+before_deploy:
+  - git config --global user.email "builds@travis-ci.com"
+  - git config --global user.name "Travis CI"
+  - export GIT_TAG=$APP_VERSION-$TRAVIS_BUILD_NUMBER
+  - git tag $GIT_TAG -a -m "Generated tag from TravisCI for $GIT_TAG"
+  - git push -q https://$GITHUBTOKEN@github.com/lgangloff/spring-boot-angular2-starter --tags
+  - ls -R
+
+deploy:
+  provider: releases
+  skip_cleanup: true
+  api_key:
+    secure: xhn2ozTFjSga1qxpviQ/aax9U9iCLQVzzcBPHbfJLEcNLTLCINn/SNy7h9ixqiU7oQyrC3QOFigVL05hGbPgx4fRuSL4srh+1slMFf74dmDXhBoO42vQ0SOWDbrc1GfljCpuVJTz5wAd7Hs9Tuf60XXYmLR1qIqRibwyQM7iLKYB/JOaRrqkZwVv3sJXSJhWsHno7n9JHElfxMlJKOJmiz0V7s99DpSt4m0VvrQsZlGPLCB7QPvMv6+pHcerll8uV9Kzfcb5USlXo/pkNyXDHt8rcrAYtjNNK06L8/xwak3kiQwuilUN5kgEIsO/8gTecPqJZxaMvDI7WFKuJUvtwdwi7kcbHYsY5PHoJQs9o18Yjq7X0seTimf2aKT7MqPNisOMmvJmOlkQVlEoq4AyzAXv/II5HZ2puCmE2nyBZHud3nNZ6V/mmCcLpTJraJLDd5FipucYTz6cVMd07Vk+25si7gcxGheOLn3cdHxZdXi6xieIKfW8lJmsLqqh7nGjPQZnUvKY5QlRep+EjdZMS4B3BrAFX64vsg2fphPWwfIV6xJx/I4kCsJiLKWUDTyUccQD2HcIfLgedA0exJs6LR5SeVhtvgqLuyANMlVFZbHHX/fatMmbLBHXAq2GMIb5efRTfVtMofp7HpPSsA/nDxco0w/xnZffYHygkAHC/n4=
+  file: target/spring-boot-angular2-starter-$GIT_TAG.jar
+  on:
+    repo: lgangloff/spring-boot-angular2-starter
+    tags: false
+    branch: master
+    
