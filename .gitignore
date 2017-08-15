@@ -16,6 +16,7 @@ src/main/webapp/node_modules
 .settings/
 
 # IDE - VSCode
+.vscode/
 src/main/webapp/.vscode/*
 !src/main/webapp/.vscode/settings.json
 !src/main/webapp/.vscode/tasks.json
