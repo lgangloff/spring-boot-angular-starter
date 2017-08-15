@@ -27,8 +27,7 @@ before_deploy:
 deploy:
   provider: releases
   skip_cleanup: true
-  api_key:
-    secure: xhn2ozTFjSga1qxpviQ/aax9U9iCLQVzzcBPHbfJLEcNLTLCINn/SNy7h9ixqiU7oQyrC3QOFigVL05hGbPgx4fRuSL4srh+1slMFf74dmDXhBoO42vQ0SOWDbrc1GfljCpuVJTz5wAd7Hs9Tuf60XXYmLR1qIqRibwyQM7iLKYB/JOaRrqkZwVv3sJXSJhWsHno7n9JHElfxMlJKOJmiz0V7s99DpSt4m0VvrQsZlGPLCB7QPvMv6+pHcerll8uV9Kzfcb5USlXo/pkNyXDHt8rcrAYtjNNK06L8/xwak3kiQwuilUN5kgEIsO/8gTecPqJZxaMvDI7WFKuJUvtwdwi7kcbHYsY5PHoJQs9o18Yjq7X0seTimf2aKT7MqPNisOMmvJmOlkQVlEoq4AyzAXv/II5HZ2puCmE2nyBZHud3nNZ6V/mmCcLpTJraJLDd5FipucYTz6cVMd07Vk+25si7gcxGheOLn3cdHxZdXi6xieIKfW8lJmsLqqh7nGjPQZnUvKY5QlRep+EjdZMS4B3BrAFX64vsg2fphPWwfIV6xJx/I4kCsJiLKWUDTyUccQD2HcIfLgedA0exJs6LR5SeVhtvgqLuyANMlVFZbHHX/fatMmbLBHXAq2GMIb5efRTfVtMofp7HpPSsA/nDxco0w/xnZffYHygkAHC/n4=
+  api_key: $GITHUBTOKEN
   file: target/spring-boot-angular2-starter-$GIT_TAG.jar
   on:
     repo: lgangloff/spring-boot-angular2-starter
