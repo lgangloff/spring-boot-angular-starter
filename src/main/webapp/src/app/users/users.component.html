@@ -1,0 +1,7 @@
+<div class="users-wrapper">
+  <ul>
+    <li *ngFor="let user of users">
+      <a href="/users/edit/{{user.id}}">{{user.firstName}} {{user.lastName}} </a>
+    </li>
+  </ul>
+</div>
