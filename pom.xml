@@ -123,54 +123,63 @@
 					</archive>
 				</configuration>
 			</plugin>
-			<plugin>
-				<groupId>com.github.eirslett</groupId>
-				<artifactId>frontend-maven-plugin</artifactId>
-				<version>1.5</version>
-				<configuration>
-					<workingDirectory>src/main/webapp</workingDirectory>
-					<installDirectory>temp</installDirectory>
-				</configuration>
-				<executions>
-					<!-- It will install nodejs and npm -->
-					<execution>
-						<id>install node and npm</id>
-						<goals>
-							<goal>install-node-and-npm</goal>
-						</goals>
-						<configuration>
-							<nodeVersion>v6.10.3</nodeVersion>
-							<npmVersion>5.0.3</npmVersion>
-						</configuration>
-					</execution>
-
-					<!-- It will execute command "npm install" inside "/src/main/webapp" directory -->
-					<execution>
-						<id>npm install</id>
-						<goals>
-							<goal>npm</goal>
-						</goals>
-						<configuration>
-							<arguments>install</arguments>
-						</configuration>
-					</execution>
-
-					<!-- It will execute command "npm build" inside "/src/main/webapp" directory 
-						to clean and create "/dist" directory -->
-					<execution>
-						<id>npm build</id>
-						<goals>
-							<goal>npm</goal>
-						</goals>
-						<configuration>
-							<arguments>run build</arguments>
-						</configuration>
-					</execution>
-				</executions>
-			</plugin>
 		</plugins>
-
 	</build>
+	
+	<profiles>
+		<profile>
+			<activation><property><name>make_asset</name><value>true</value></property></activation>
+			<build>
+				<plugins>
+					<plugin>
+						<groupId>com.github.eirslett</groupId>
+						<artifactId>frontend-maven-plugin</artifactId>
+						<version>1.5</version>
+						<configuration>
+							<workingDirectory>src/main/webapp</workingDirectory>
+							<installDirectory>temp</installDirectory>
+						</configuration>
+						<executions>
+							<!-- It will install nodejs and npm -->
+							<execution>
+								<id>install node and npm</id>
+								<goals>
+									<goal>install-node-and-npm</goal>
+								</goals>
+								<configuration>
+									<nodeVersion>v6.10.3</nodeVersion>
+									<npmVersion>5.0.3</npmVersion>
+								</configuration>
+							</execution>
+		
+							<!-- It will execute command "npm install" inside "/src/main/webapp" directory -->
+							<execution>
+								<id>npm install</id>
+								<goals>
+									<goal>npm</goal>
+								</goals>
+								<configuration>
+									<arguments>install</arguments>
+								</configuration>
+							</execution>
+		
+							<!-- It will execute command "npm build" inside "/src/main/webapp" directory 
+								to clean and create "/dist" directory -->
+							<execution>
+								<id>npm build</id>
+								<goals>
+									<goal>npm</goal>
+								</goals>
+								<configuration>
+									<arguments>run build</arguments>
+								</configuration>
+							</execution>
+						</executions>
+					</plugin>
+				</plugins>
+			</build>
+		</profile>
+	</profiles>
 	<repositories>
 		<repository>
 			<id>spring-snapshots</id>

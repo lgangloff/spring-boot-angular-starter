@@ -1,9 +1,7 @@
 package org.lgangloff.starter.config;
 
 import java.util.Arrays;
-import java.util.EnumSet;
 
-import javax.servlet.DispatcherType;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 
@@ -32,5 +30,7 @@ public class WebConfigurer implements ServletContextInitializer {
         servletContext.addListener(RequestContextListener.class);
         log.info("Web application fully configured");
     }
+    
+   
 
 }

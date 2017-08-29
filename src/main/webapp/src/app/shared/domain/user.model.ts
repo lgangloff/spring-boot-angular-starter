@@ -1,6 +1,6 @@
 export class User{
 
-    private id: number;
+    id: number;
     private title:string;
 
     private firstName:string;
@@ -20,9 +20,6 @@ export class User{
     private roles:Array<String> ;
 
 
-    constructor($id:number, $firstName: string, $lastName: string){
-        this.id = $id;
-        this.firstName = $firstName;
-        this.lastName = $lastName;
+    constructor(){
     }
 }

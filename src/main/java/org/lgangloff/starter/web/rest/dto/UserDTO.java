@@ -2,14 +2,20 @@ package org.lgangloff.starter.web.rest.dto;
 
 import java.util.List;
 import java.util.function.Function;
+import java.util.stream.Collectors;
 
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 import org.hibernate.validator.constraints.Email;
+import org.lgangloff.starter.domain.Authority;
 import org.lgangloff.starter.domain.User;
 import org.lgangloff.starter.domain.enumeration.Title;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonInclude.Include;
+
+@JsonInclude(Include.NON_EMPTY)
 public class UserDTO {
 
 	
@@ -32,6 +38,8 @@ public class UserDTO {
 		dto.setLocked(member.isLocked());
 		dto.setEmail(member.getLogin());
 		dto.setTelephonNumber(member.getTelephonNumber());
+		
+		dto.setRoles(member.getAuthorities().stream().map(Authority::getName).collect(Collectors.toList()));
          
 		return dto;
 	};

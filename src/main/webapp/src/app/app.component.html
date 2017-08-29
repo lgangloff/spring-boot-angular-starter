@@ -1,11 +1,7 @@
-<!--The whole content below can be removed with the new code.-->
-<div style="text-align:center">
-  <h1>
-    Welcome to {{title}}!!
-  </h1>
+<div class="container-fluid">
+  <app-menu></app-menu>
+
+  <div class="container">
+    <router-outlet></router-outlet>
+  </div>
 </div>
-
-<a routerLink="/login" routerLinkActive="active">Log in</a>
-
-<router-outlet></router-outlet>
-

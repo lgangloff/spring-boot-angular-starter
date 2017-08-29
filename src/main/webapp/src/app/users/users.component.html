@@ -1,7 +1,35 @@
 <div class="users-wrapper">
-  <ul>
-    <li *ngFor="let user of users">
-      <a href="/users/edit/{{user.id}}">{{user.firstName}} {{user.lastName}} </a>
-    </li>
-  </ul>
+
+  <alert-error [error]="error"></alert-error>
+
+  <div class="card">
+    <div class="card-block">
+        <form novalidate (ngSubmit)="search()">
+          <div class="row">
+            <div class="col-9">
+               <input type="text" class="form-control" placeholder="Nom, prénom...">
+            </div>
+            <div class="col-3 float-right">
+              <submit-button [status]="searchStatus" [value]="'Rechercher'" class="float-right"></submit-button>
+            </div>
+          </div>
+          
+        </form>
+    </div>
+  </div>
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th>User</th>
+        <th>Email</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let user of users">
+        <td><a [routerLink]="['/user', user.id]">{{user.firstName}} {{user.lastName}}</a></td>
+        <td> {{user.email}} </td>
+      </tr>
+    </tbody>
+  </table>
+  
 </div>

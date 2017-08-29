@@ -1,0 +1,69 @@
+<div class="card">
+  <div class="card-block">
+    <form novalidate (ngSubmit)="onSubmit()">
+
+      <alert-error [error]="error"></alert-error>
+
+
+      <div class="row form-group" *ngIf="user.id">
+        <div class="col-12">
+            <input type="text" class="form-control" id="id" name="id" [(ngModel)]="user.id" readonly>
+        </div>
+      </div>
+      <div class="row form-group">
+        <div class="col-3">
+          <select class="form-control" id="field_title" name="title" [(ngModel)]="user.title" required>
+              <option value="MS">Mme</option>
+              <option value="MR">Mr</option>
+          </select>
+        </div>
+        <div class="col-4">
+          <input type="text" class="form-control" id="firstName" name="firstName" [(ngModel)]="user.firstName">
+        </div>
+        <div class="col-5">
+          <input type="text" class="form-control" id="lastName" name="lastName" [(ngModel)]="user.lastName">
+        </div>
+      </div>
+
+      <div class="row form-group">
+        <div class="col-12">
+            <input type="text" class="form-control" id="nickName" name="nickName" [(ngModel)]="user.nickName">
+        </div>
+      </div>
+
+      <div class="row form-group">
+        <div class="col-12">
+          <input type="text" class="form-control" id="address" name="address" [(ngModel)]="user.address" maxlength="255">
+        </div>
+      </div>
+
+      <div class="row form-group">
+        <div class="col-4">
+            <input type="text" class="form-control" id="zipCode" name="zipCode" [(ngModel)]="user.zipCode" maxlength="20">
+        </div>
+        <div class="col-5">
+            <input type="text" class="form-control" id="city" name="city"[(ngModel)]="user.city" maxlength="100">
+        </div>
+        <div class="col-3">
+            <select id="langKey" name="langKey" class="form-control" [(ngModel)]="user.langKey"></select>
+        </div>
+      </div>
+
+      <div class="row form-group">
+        <div class="col-6">
+                <input type="email" class="form-control" id="email" name="email" [(ngModel)]="user.email" required maxlength="255">
+        </div>
+        <div class="col-6">
+                <input type="text" class="form-control" name="telephonNumber" id="field_telephonNumber" [(ngModel)]="user.telephonNumber">
+        </div>
+      </div>
+      <div class="row form-group"></div>
+
+      <div class="form-group float-right">
+          <button type="button" class="btn btn-secondary" (click)="cancel()">Annuler</button>
+          <submit-button [status]="status"></submit-button>
+      </div>
+
+    </form>
+  </div>
+</div>
