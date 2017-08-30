@@ -4,11 +4,11 @@
 target/
 temp/
 src/main/resources/static
-src/main/webapp/tmp
-src/main/webapp/out-tsc
+src/main/webapp/app/tmp
+src/main/webapp/app/out-tsc
 
 # dependencies
-src/main/webapp/node_modules
+src/main/webapp/app/node_modules
 
 # IDEs and editors
 .project
@@ -17,24 +17,24 @@ src/main/webapp/node_modules
 
 # IDE - VSCode
 .vscode/
-src/main/webapp/.vscode/*
-!src/main/webapp/.vscode/settings.json
-!src/main/webapp/.vscode/tasks.json
-!src/main/webapp/.vscode/launch.json
-!src/main/webapp/.vscode/extensions.json
+src/main/webapp/app/.vscode/*
+!src/main/webapp/app/.vscode/settings.json
+!src/main/webapp/app/.vscode/tasks.json
+!src/main/webapp/app/.vscode/launch.json
+!src/main/webapp/app/.vscode/extensions.json
 
 # misc
-src/main/webapp/.sass-cache
-src/main/webapp/connect.lock
-src/main/webapp/coverage
-src/main/webapp/libpeerconnection.log
-src/main/webapp/npm-debug.log*
-src/main/webapp/testem.log
-src/main/webapp/typings
+src/main/webapp/app/.sass-cache
+src/main/webapp/app/connect.lock
+src/main/webapp/app/coverage
+src/main/webapp/app/libpeerconnection.log
+src/main/webapp/app/npm-debug.log*
+src/main/webapp/app/testem.log
+src/main/webapp/app/typings
 
 # e2e
-src/main/webapp/e2e/*.js
-src/main/webapp/e2e/*.map
+src/main/webapp/app/e2e/*.js
+src/main/webapp/app/e2e/*.map
 
 # System Files
 .DS_Store
