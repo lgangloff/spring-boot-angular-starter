@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { User } from "../shared/domain/user.model";
 
 
@@ -13,11 +13,18 @@ export class UserService {
     return this.http.put("api/users", user);
   }
 
+  delete(user: User){
+    return this.http.delete("api/users/" + user.id);
+  }
+
   get(id){
     return this.http.get<User>("api/users/" + id);
   }
 
-  findAll(){
-    return this.http.get<User[]>("api/users");
+  findAll(search: string){
+    return this.http.get<User[]>("api/users", {
+        params: new HttpParams().set("query", search)
+      }
+    );
   }
 }

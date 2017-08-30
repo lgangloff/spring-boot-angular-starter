@@ -16,7 +16,7 @@
     -->
     <changeSet id="00000000000001" author="lgangloff">
         <createTable tableName="user">
-            <column name="id" type="bigint">
+            <column name="id" type="BIGSERIAL" startWith="1000">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
 			
@@ -50,6 +50,9 @@
             <column name="last_modified_by" type="varchar(100)"/>
             <column name="last_modified_date" type="timestamp"/>
         </createTable>
+        <sql>
+        	alter sequence user_id_seq RESTART with 1000;
+        </sql>
         
         <createTable tableName="authority">
             <column name="name" type="varchar(50)">

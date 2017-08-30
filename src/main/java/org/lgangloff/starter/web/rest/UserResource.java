@@ -5,9 +5,11 @@ import java.net.URISyntaxException;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import javax.validation.Valid;
 
+import org.apache.commons.lang3.StringUtils;
 import org.lgangloff.starter.domain.Authority;
 import org.lgangloff.starter.domain.User;
 import org.lgangloff.starter.service.UserService;
@@ -54,7 +56,7 @@ public class UserResource {
 		}
 		UserDTO result = UserDTO.MAPPER.apply(userService.doSave(user));
 		return ResponseEntity.created(new URI("/api/user/" + result.getId()))
-				.headers(HeaderUtil.createEntityUpdateAlert("user", user.getId().toString()))
+				.headers(HeaderUtil.createEntityUpdateAlert("user", result.getId().toString()))
 				.body(result);
 	}
 
@@ -82,19 +84,18 @@ public class UserResource {
 	public ResponseEntity<List<UserDTO>> getAll(
 			@RequestParam(value = "page", required = false) Integer offset,
 			@RequestParam(value = "per_page", required = false) Integer limit,
-			@RequestParam(value = "search", required = false) String search) throws URISyntaxException {
+			@RequestParam(value = "query", required = false) String query) throws URISyntaxException {
 		Pageable generatePageRequest = PaginationUtil.generatePageRequest(offset, limit);
 		
-		Page<User> page = doFindAll(generatePageRequest, search);
+		Page<User> page = doFindAll(generatePageRequest, query);
 		HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/users", offset, limit);
 		return new ResponseEntity<>(page.map(UserDTO.MAPPER).getContent(), headers, HttpStatus.OK);
 	}
 	
 	
-	protected Page<User> doFindAll(Pageable generatePageRequest, String search) {
-		search = search == null ? "" :search;
-		String customSearch = "%" + search.replaceAll("\\*", "%").toLowerCase() + "%";
-		return userService.findAll(generatePageRequest);
+	protected Page<User> doFindAll(Pageable generatePageRequest, String query) {
+		query = query == null ? "%" : "%" + query.replaceAll("\\*", "%").toLowerCase() + "%";
+		return userService.findAll(query, generatePageRequest);
 	}
 
 	/**
@@ -110,7 +111,8 @@ public class UserResource {
 	
 
 	protected UserDTO doGet(Long id) {
-		User user = userService.findOne(id);		
+		User user = userService.findOne(id);
+		if (user == null) return null;
 		UserDTO userDTO = UserDTO.MAPPER.apply(user);
 		userDTO.setRoles(user.getAuthorities().stream().map(Authority::getName).collect(Collectors.toList()));
 		return userDTO;

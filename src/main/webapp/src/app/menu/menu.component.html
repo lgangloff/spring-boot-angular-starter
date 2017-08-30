@@ -1,4 +1,6 @@
 <nav class="nav navbar-light" style="background-color: #e3f2fd;">
+    
+
     <ul class="nav mr-auto">
         <li class="nav-item">
             <a class="nav-link" routerLink="/" routerLinkActive="active">Home</a>
@@ -6,11 +8,12 @@
         <li class="nav-item" *ngIf="isAuthenticated()">
             <a class="nav-link" routerLink="/users" routerLinkActive="active">Users</a>
         </li>
+    </ul>   
+
+    <ul class="nav navbar-right">
         <li class="nav-item" *ngIf="isAuthenticated()">
-            <a class="nav-link" routerLink="/account" routerLinkActive="active">My Account</a>
-        </li>
-        <li class="nav-item" *ngIf="isAuthenticated()">
-            <a class="nav-link" routerLink="/login" routerLinkActive="active">Logout</a>
+            <a class="nav-link" routerLink="/logout" routerLinkActive="active">Logout {{displayName}}</a>
         </li>
     </ul>   
+
 </nav>

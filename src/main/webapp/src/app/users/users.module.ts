@@ -5,12 +5,12 @@ import { RouterModule, Routes } from '@angular/router';
 import { AuthGuard } from '../shared/auth/auth.guard';
 import { SharedModule } from '../shared/shared.module';
 import { UsersComponent } from "./users.component";
-import { UserService } from "../services/user.service";
 import { UserDetailComponent } from './user-detail/user-detail.component';
 
 const usersRoutes: Routes = [
   { path: 'users',  component: UsersComponent, canActivate: [AuthGuard] },
-  { path: 'user/:id', component: UserDetailComponent, canActivate: [AuthGuard] }
+  { path: 'user/new', component: UserDetailComponent, canActivate: [AuthGuard] },
+  { path: 'user/:id', component: UserDetailComponent, canActivate: [AuthGuard] },
 ];
 
 @NgModule({
@@ -21,6 +21,6 @@ const usersRoutes: Routes = [
   ],
   declarations: [UsersComponent, UserDetailComponent],
   exports: [UsersComponent, RouterModule],
-  providers: [UserService]
+  providers: []
 })
 export class UsersModule { }

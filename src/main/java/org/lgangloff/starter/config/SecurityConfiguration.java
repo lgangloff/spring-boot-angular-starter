@@ -78,6 +78,8 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
+    	String remerberMeKey = env.getProperty("security.rememberme.key");
+    	
         http
         .csrf()
 	        .ignoringAntMatchers("/**")
@@ -86,8 +88,8 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 	        .exceptionHandling()
             .authenticationEntryPoint(authenticationEntryPoint)
         .and()
-            .rememberMe()
-            .rememberMeServices(new CustomPersistentRememberMeServices(env, userDetailsService, tokenRepository, userRepository))
+            .rememberMe().key(remerberMeKey)
+            .rememberMeServices(new CustomPersistentRememberMeServices(remerberMeKey, userDetailsService, tokenRepository, userRepository))
             .rememberMeParameter("remember-me")
         .and()
             .formLogin()

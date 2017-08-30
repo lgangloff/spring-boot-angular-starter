@@ -13,6 +13,9 @@ export class SubmitButtonComponent implements OnInit {
   @Input('value')
   private buttonValue = "Sauvegarder";
 
+  @Input('disabled')
+  private disabled = false;
+
   constructor() { }
 
   ngOnInit() {

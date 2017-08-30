@@ -1,25 +1,28 @@
 export class User{
 
     id: number;
-    private title:string;
+    title:string;
 
-    private firstName:string;
-    private lastName:string;
-    private nickName:string;
-    private address:string;
-    private zipCode:string;
-    private city:string;
-    private telephonNumber:string;
-    private email:string;
-    private langKey:string;
+    firstName:string;
+    lastName:string;
+    nickName:string;
+    address:string;
+    zipCode:string;
+    city:string;
+    telephonNumber:string;
+    email:string;
+    langKey:string;
     
-    private locked:boolean;    
-    private enabled:boolean;
+    locked:boolean;    
+    enabled:boolean;
 
 
-    private roles:Array<String> ;
+    roles:Array<String> ;
 
 
     constructor(){
+        this.title = "MR";
+        this.roles = new Array();
+        this.roles.push("ROLE_USER");
     }
 }

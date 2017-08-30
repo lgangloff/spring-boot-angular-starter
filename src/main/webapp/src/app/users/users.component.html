@@ -2,19 +2,28 @@
 
   <alert-error [error]="error"></alert-error>
 
-  <div class="card">
-    <div class="card-block">
-        <form novalidate (ngSubmit)="search()">
-          <div class="row">
-            <div class="col-9">
-               <input type="text" class="form-control" placeholder="Nom, prénom...">
-            </div>
-            <div class="col-3 float-right">
-              <submit-button [status]="searchStatus" [value]="'Rechercher'" class="float-right"></submit-button>
-            </div>
-          </div>
-          
-        </form>
+  <div class="row vcenter">
+    <div class="col-10">
+      <div class="card">
+        <div class="card-block">
+            <form novalidate (ngSubmit)="search()">
+              <div class="row">
+                <div class="col-9">
+                  <input type="text" class="form-control" placeholder="Nom, prénom..." [(ngModel)]="searchValue" name="searchValue">
+                </div>
+                <div class="col-3 float-right">
+                  <submit-button [status]="searchStatus" [value]="'Rechercher'" class="float-right"></submit-button>
+                </div>
+              </div>
+              
+            </form>
+        </div>
+      </div>
+    </div>
+    <div class="col-2">
+      <button type="submit" class="btn btn-primary" [routerLink]="['/user/new']">
+          <i class="fa fa-plus" aria-hidden="true"></i>
+      </button>
     </div>
   </div>
   <table class="table table-striped">
@@ -22,12 +31,16 @@
       <tr>
         <th>User</th>
         <th>Email</th>
+        <th *ngFor="let a of authorities" style="text-align: center;">{{a.replace('ROLE_', '')}}</th>
       </tr>
     </thead>
     <tbody>
       <tr *ngFor="let user of users">
         <td><a [routerLink]="['/user', user.id]">{{user.firstName}} {{user.lastName}}</a></td>
         <td> {{user.email}} </td>
+        <td *ngFor="let a of authorities" style="text-align: center;">
+          <input type="checkbox" checked disabled *ngIf="user.roles && user.roles.indexOf(a) != -1">          
+        </td>
       </tr>
     </tbody>
   </table>

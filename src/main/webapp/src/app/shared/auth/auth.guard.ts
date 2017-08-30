@@ -1,11 +1,14 @@
 import { Injectable } from '@angular/core';
 import { CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot } from '@angular/router';
 import { Observable } from 'rxjs/Observable';
+import { Subject } from 'rxjs/Subject';
 import { Router } from '@angular/router';
 import { Principal } from '../auth/principal.service';
 
 @Injectable()
 export class AuthGuard implements CanActivate {
+
+  private authenticationState = new Subject<boolean>();
 
   constructor(private router: Router, private principal: Principal) { }
 
@@ -17,7 +20,16 @@ export class AuthGuard implements CanActivate {
         return true;
       }
 
-      this.router.navigate(['/login']);
-      return false;    
+
+      this.principal.identity(true).subscribe(
+        res=>{
+          if (!this.principal.isAuthenticated()){
+            this.router.navigate(['/login']);
+          }
+          this.authenticationState.next(this.principal.isAuthenticated());
+        }
+      );  
+      
+      return this.authenticationState;
   }
 }

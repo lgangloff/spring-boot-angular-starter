@@ -10,11 +10,19 @@ export class MenuComponent implements OnInit {
 
   constructor(private principal: Principal) { }
 
+  private displayName;
+
   ngOnInit() {
+    this.principal.identity().subscribe(res=>{
+      this.displayName = res != null ? res.firstName : "";
+    });
   }
 
 
   isAuthenticated(){
     return this.principal.isAuthenticated();
   }
+
+
+
 }

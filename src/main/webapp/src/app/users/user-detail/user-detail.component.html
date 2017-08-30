@@ -1,6 +1,6 @@
 <div class="card">
   <div class="card-block">
-    <form novalidate (ngSubmit)="onSubmit()">
+    <form novalidate (ngSubmit)="onSubmit()" #userForm="ngForm" >
 
       <alert-error [error]="error"></alert-error>
 
@@ -18,31 +18,31 @@
           </select>
         </div>
         <div class="col-4">
-          <input type="text" class="form-control" id="firstName" name="firstName" [(ngModel)]="user.firstName">
+          <input type="text" class="form-control" id="firstName" name="firstName" [(ngModel)]="user.firstName" placeholder="Prénom" required maxlength="50">
         </div>
         <div class="col-5">
-          <input type="text" class="form-control" id="lastName" name="lastName" [(ngModel)]="user.lastName">
+          <input type="text" class="form-control" id="lastName" name="lastName" [(ngModel)]="user.lastName" placeholder="Nom" required maxlength="50">
         </div>
       </div>
 
       <div class="row form-group">
         <div class="col-12">
-            <input type="text" class="form-control" id="nickName" name="nickName" [(ngModel)]="user.nickName">
+            <input type="text" class="form-control" id="nickName" name="nickName" [(ngModel)]="user.nickName" placeholder="Pseudo" maxlength="50">
         </div>
       </div>
 
       <div class="row form-group">
         <div class="col-12">
-          <input type="text" class="form-control" id="address" name="address" [(ngModel)]="user.address" maxlength="255">
+          <input type="text" class="form-control" id="address" name="address" [(ngModel)]="user.address" placeholder="Adresse" maxlength="255">
         </div>
       </div>
 
       <div class="row form-group">
         <div class="col-4">
-            <input type="text" class="form-control" id="zipCode" name="zipCode" [(ngModel)]="user.zipCode" maxlength="20">
+            <input type="text" class="form-control" id="zipCode" name="zipCode" [(ngModel)]="user.zipCode" placeholder="Code Postal" maxlength="20">
         </div>
         <div class="col-5">
-            <input type="text" class="form-control" id="city" name="city"[(ngModel)]="user.city" maxlength="100">
+            <input type="text" class="form-control" id="city" name="city"[(ngModel)]="user.city" placeholder="Ville" maxlength="100">
         </div>
         <div class="col-3">
             <select id="langKey" name="langKey" class="form-control" [(ngModel)]="user.langKey"></select>
@@ -51,17 +51,37 @@
 
       <div class="row form-group">
         <div class="col-6">
-                <input type="email" class="form-control" id="email" name="email" [(ngModel)]="user.email" required maxlength="255">
+                <input type="email" class="form-control" id="email" name="email" [(ngModel)]="user.email" placeholder="Email" required maxlength="255" email>
         </div>
         <div class="col-6">
-                <input type="text" class="form-control" name="telephonNumber" id="field_telephonNumber" [(ngModel)]="user.telephonNumber">
+                <input type="text" class="form-control" name="telephonNumber" id="field_telephonNumber" [(ngModel)]="user.telephonNumber" placeholder="Téléphone" maxlength="32">
         </div>
       </div>
-      <div class="row form-group"></div>
+      <div class="row form-group">
+          <div class="col-12">
+            <div class="card">
+              <div class="card-header">
+                Roles
+              </div>
+             <div class="card-block">
+                <div class="form-check form-check-inline" *ngFor="let a of authorities">
+                  <label class="form-check-label">
+                      <input class="form-check-input" type="checkbox" name="roles[]"
+                        [value]="a.selected" [checked]="a.selected"
+                        (change)="$event.target.checked ? a.selected = true : a.selected = false"> {{a.name}}
+                  </label>
+                </div>
+              </div>
+            </div>
+          </div>
+      </div>
 
-      <div class="form-group float-right">
+      <div class="form-group">
+        <button type="button" class="btn btn-danger" (click)="delete()">Supprimer</button>
+        <div class="float-right">
           <button type="button" class="btn btn-secondary" (click)="cancel()">Annuler</button>
-          <submit-button [status]="status"></submit-button>
+          <submit-button [status]="status" [disabled]="!userForm.form.valid"></submit-button>
+        </div>
       </div>
 
     </form>
