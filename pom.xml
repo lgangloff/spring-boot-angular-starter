@@ -152,7 +152,7 @@
 								</configuration>
 							</execution>
 		
-							<!-- It will execute command "npm install" inside "/src/main/webapp" directory -->
+							<!-- It will execute command "npm install" inside "/src/main/webapp/app" directory -->
 							<execution>
 								<id>npm install</id>
 								<goals>
@@ -163,7 +163,7 @@
 								</configuration>
 							</execution>
 		
-							<!-- It will execute command "npm build" inside "/src/main/webapp" directory 
+							<!-- It will execute command "npm build" inside "/src/main/webapp/app" directory 
 								to clean and create "/dist" directory -->
 							<execution>
 								<id>npm build</id>

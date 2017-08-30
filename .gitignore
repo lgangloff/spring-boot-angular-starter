@@ -3,7 +3,7 @@
 # compiled output
 target/
 temp/
-src/main/resources/static
+src/main/resources/dist
 src/main/webapp/app/tmp
 src/main/webapp/app/out-tsc
 
