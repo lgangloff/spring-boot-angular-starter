@@ -35,7 +35,7 @@ public class WebConfigurer implements WebMvcConfigurer, ServletContextInitialize
 
 	@Override
 	public void addResourceHandlers(ResourceHandlerRegistry registry) {
-        registry.addResourceHandler("/**").addResourceLocations("classpath://dist/");
+        registry.addResourceHandler("/app/**").addResourceLocations("classpath://app/");
 	}
     
    
