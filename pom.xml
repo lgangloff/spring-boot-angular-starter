@@ -3,10 +3,11 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 
+
 	<parent>
-		<groupId>org.springframework.boot</groupId>
-		<artifactId>spring-boot-starter-parent</artifactId>
-		<version>2.0.0.M3</version>
+	    <groupId>org.springframework.boot</groupId>
+	    <artifactId>spring-boot-starter-parent</artifactId>
+    	<version>2.1.0.BUILD-SNAPSHOT</version>
 	</parent>
 
 	<groupId>org.lgangloff.starter</groupId>
@@ -14,11 +15,16 @@
 	<version>1.0.0-SNAPSHOT</version>
 	<packaging>jar</packaging>
 
-	<name>Starter Springboot + Angular2</name>
+	<name>Starter Springboot + Angular</name>
 
 	<properties>
+		<commons-text.version>1.3</commons-text.version>
 		<joda-time-hibernate.version>1.4</joda-time-hibernate.version>
 		<usertype-core.version>6.0.1.GA</usertype-core.version>
+		
+		
+		<node.version>v9.11.1</node.version>
+		<npm.version>5.8.0</npm.version>
 	</properties>
 
 
@@ -68,7 +74,7 @@
 		<dependency>
 		    <groupId>org.apache.commons</groupId>
 		    <artifactId>commons-text</artifactId>
-		    <version>1.1</version>
+		    <version>${commons-text.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>joda-time</groupId>
@@ -93,6 +99,7 @@
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
+				<version>2.0.1.RELEASE</version>
 				<configuration>
 					<arguments>
 						<argument>--spring.profiles.active=prod</argument>
@@ -134,9 +141,9 @@
 					<plugin>
 						<groupId>com.github.eirslett</groupId>
 						<artifactId>frontend-maven-plugin</artifactId>
-						<version>1.5</version>
+						<version>1.6</version>
 						<configuration>
-							<workingDirectory>src/main/webapp/app</workingDirectory>
+							<workingDirectory>src/main/webapp/angular-app</workingDirectory>
 							<installDirectory>temp</installDirectory>
 						</configuration>
 						<executions>
@@ -147,8 +154,8 @@
 									<goal>install-node-and-npm</goal>
 								</goals>
 								<configuration>
-									<nodeVersion>v6.10.3</nodeVersion>
-									<npmVersion>5.0.3</npmVersion>
+									<nodeVersion>${node.version}</nodeVersion>
+									<npmVersion>${npm.version}</npmVersion>
 								</configuration>
 							</execution>
 		
@@ -181,26 +188,13 @@
 		</profile>
 	</profiles>
 	<repositories>
-		<repository>
-			<id>spring-snapshots</id>
-			<url>http://repo.spring.io/snapshot</url>
-			<snapshots>
-				<enabled>true</enabled>
-			</snapshots>
-		</repository>
-		<repository>
-			<id>spring-milestones</id>
-			<url>http://repo.spring.io/milestone</url>
-		</repository>
+	    <repository>
+	        <id>spring-snapshots</id>
+	        <name>Spring Snapshots</name>
+	        <url>https://repo.spring.io/libs-snapshot</url>
+	        <snapshots>
+	            <enabled>true</enabled>
+	        </snapshots>
+	    </repository>
 	</repositories>
-	<pluginRepositories>
-		<pluginRepository>
-			<id>spring-snapshots</id>
-			<url>http://repo.spring.io/snapshot</url>
-		</pluginRepository>
-		<pluginRepository>
-			<id>spring-milestones</id>
-			<url>http://repo.spring.io/milestone</url>
-		</pluginRepository>
-	</pluginRepositories>
 </project>

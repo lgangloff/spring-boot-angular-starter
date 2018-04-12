@@ -4,10 +4,10 @@ import java.util.List;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
+import javax.validation.constraints.Email;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
-import org.hibernate.validator.constraints.Email;
 import org.lgangloff.starter.domain.Authority;
 import org.lgangloff.starter.domain.User;
 import org.lgangloff.starter.domain.enumeration.Title;

@@ -18,13 +18,13 @@ import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
+import javax.validation.constraints.Email;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 import org.hibernate.annotations.Type;
-import org.hibernate.validator.constraints.Email;
 import org.joda.time.LocalDate;
 import org.lgangloff.starter.domain.enumeration.Title;
 import org.lgangloff.starter.domain.util.CustomLocalDateSerializer;

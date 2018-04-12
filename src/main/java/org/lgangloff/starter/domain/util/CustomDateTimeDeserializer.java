@@ -43,6 +43,7 @@ public class CustomDateTimeDeserializer extends JsonDeserializer<DateTime> {
 			DateTime dateTimeZoned = dateTime.withZoneRetainFields(dateTimeZone);
 			return dateTimeZoned;
         }
-        throw ctxt.mappingException(handledType());
+        ctxt.handleUnexpectedToken(handledType(), jp);
+        return null;
     }
 }

@@ -33,6 +33,7 @@ public class ISO8601LocalDateDeserializer extends JsonDeserializer<LocalDate> {
         if (t == JsonToken.VALUE_NUMBER_INT) {
             return new LocalDate(jp.getLongValue());
         }
-        throw ctxt.mappingException(handledType());
+        ctxt.handleUnexpectedToken(handledType(), jp);
+        return null;
     }
 }

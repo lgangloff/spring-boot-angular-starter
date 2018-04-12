@@ -1,33 +1,28 @@
-# Webapp
+# Starter Spring boot (2.1.0) & Angular
 
-createdb database_name
-mvn spring-boot:run 
-cd src/main/webapp
-ng serve
-mvn clean package will build angular app, generate dist dir into resources/static and package jar
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 1.1.1.
+1. Edit file `src/main/resources/config/application.yml` and define the application name under `spring.application.name`
+2. Create a PostgreSQL database named `{spring.application.name}`
 
-## Development server
+3. Run the application by lauching the main method in `Application` class or run `mvn spring-boot:run` in a terminal.
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+=> The application should start and populate the database.
 
-## Code scaffolding
+# Start Angular
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|module`.
+1. Install Angular CLI `npm install -g @angular/cli`
 
-## Build
+2. Go to `src/main/webapp/angular-app` and run `npm install`
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `-prod` flag for a production build.
+3. Then, simply run ` ng serve --proxy-conf=proxy.conf.json`
 
-## Running unit tests
+# Login to the app
+You can login with this account:
+ * system@localhost / password
+ * admin@localhost / password
+ * user@localhost / password
+ 
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+# Packaging the app
+`mvn clean package -Dmake_asset=true` will build angular app, generate dist dir into resources/static and package jar
 
-## Running end-to-end tests
 
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
-Before running the tests make sure you are serving the app via `ng serve`.
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).

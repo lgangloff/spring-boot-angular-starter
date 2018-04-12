@@ -1,25 +1,15 @@
 server:
     port: 8080
 
-liquibase:
-    change-log: classpath:config/liquibase/master.xml
-    contexts: prod
-
-logback:
-  loglevel: INFO
-  app.loglevel: DEBUG
-  
-github.download.directory: ${OPENSHIFT_DATA_DIR}/releases
-github.users.vars.path: ${HOME}/.env/user_vars
-
 spring:
+    application.name: app_name
     profiles:
         active: prod
     datasource:
         driverClassName: org.postgresql.Driver        
-        url: jdbc:postgresql://${OPENSHIFT_POSTGRESQL_DB_HOST}:${OPENSHIFT_POSTGRESQL_DB_PORT}/${OPENSHIFT_APP_NAME}
-        username: ${OPENSHIFT_POSTGRESQL_DB_USERNAME}
-        password: ${OPENSHIFT_POSTGRESQL_DB_PASSWORD}
+        url: jdbc:postgresql://${POSTGRESQL_DB_HOST}:${POSTGRESQL_DB_PORT}/${spring.application.name}
+        username: ${POSTGRESQL_DB_USERNAME}
+        password: ${POSTGRESQL_DB_PASSWORD}
         test-on-borrow: true
         test-on-return: true
         test-while-idle: true
@@ -27,7 +17,9 @@ spring:
         validation-interval: 30000
         remove-abandoned: true
         remove-abandoned-timeout: 60
-
+    liquibase:
+        change-log: classpath:config/liquibase/master.xml
+        contexts: dev
     jpa:
         database-platform: org.hibernate.dialect.PostgreSQL82Dialect
         database: POSTGRESQL

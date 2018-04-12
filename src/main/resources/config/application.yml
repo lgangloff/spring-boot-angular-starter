@@ -1,21 +1,14 @@
 server:
     port: 8080
 
-liquibase:
-    change-log: classpath:config/liquibase/master.xml
-    contexts: dev
-    
-    
-logback:
-  loglevel: INFO
-  app.loglevel: DEBUG
 
 spring:
+    application.name: app_name
     profiles:
         active: local
     datasource:
         driverClassName: org.postgresql.Driver        
-        url: jdbc:postgresql://localhost:5432/database_name
+        url: jdbc:postgresql://localhost:5432/${spring.application.name}
         username: postgres
         password: password
         test-on-borrow: true
@@ -25,6 +18,9 @@ spring:
         validation-interval: 30000
         remove-abandoned: true
         remove-abandoned-timeout: 60
+    liquibase:
+        change-log: classpath:config/liquibase/master.xml
+        contexts: dev
     jpa:
         database-platform: org.hibernate.dialect.PostgreSQL82Dialect
         database: POSTGRESQL

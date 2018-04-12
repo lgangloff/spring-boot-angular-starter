@@ -27,6 +27,7 @@ public class CustomLocalTimeDeserializer extends JsonDeserializer<LocalTime> {
             String str = jp.getText().trim();
             return formatter.parseLocalTime(str);
         }
-        throw ctxt.mappingException(handledType());
+        ctxt.handleUnexpectedToken(handledType(), jp);
+        return null;
     }
 }

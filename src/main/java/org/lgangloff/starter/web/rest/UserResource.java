@@ -5,11 +5,9 @@ import java.net.URISyntaxException;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 import javax.validation.Valid;
 
-import org.apache.commons.lang3.StringUtils;
 import org.lgangloff.starter.domain.Authority;
 import org.lgangloff.starter.domain.User;
 import org.lgangloff.starter.service.UserService;

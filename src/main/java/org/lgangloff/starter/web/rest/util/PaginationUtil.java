@@ -33,7 +33,7 @@ public class PaginationUtil {
         if (limit == null || limit > MAX_LIMIT) {
             limit = DEFAULT_LIMIT;
         }
-        return new PageRequest(offset - 1, limit);
+        return PageRequest.of(offset - 1, limit);
     }
 
     public static HttpHeaders generatePaginationHttpHeaders(Page<?> page, String baseUrl, Integer offset, Integer limit)
